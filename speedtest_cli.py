@@ -29,6 +29,7 @@ import threading
 import re
 import signal
 import socket
+import datetime
 
 # Used for bound_interface
 socket_socket = socket.socket
@@ -461,7 +462,7 @@ def speedtest():
                         help='Suppress verbose output, only show basic '
                              'information')
     parser.add_argument('--csv', action='store_true',
-                        help='Format results as CSV (ping, download, upload); '
+                        help='Format results as CSV (test date time, test server location, ping, download, upload); '
                              'enables --simple as well')
     parser.add_argument('--list', action='store_true',
                         help='Display a list of speedtest.net servers '
@@ -491,6 +492,11 @@ def speedtest():
     # --csv enables --simple
     if args.csv:
         args.simple = True
+
+    # print datetime
+    if args.csv:
+        runtime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        print_(runtime + ',', end='')
 
     if not args.simple:
         print_('Retrieving speedtest.net configuration...')
@@ -596,8 +602,8 @@ def speedtest():
                    '%(latency)s ms' % best)
     else:
         if args.csv:
-            print_('Hosted by %(sponsor)s (%(name)s) [%(d)0.2f km]: '
-                   '%(latency)s ms,' % best, end='') 
+            print_('Hosted by %(sponsor)s (%(name)s) [%(d)0.2f km],'
+                    % best, end='') 
             print_('%(latency)s,' % best, end='')
         else:
             print_('Ping: %(latency)s ms' % best)
