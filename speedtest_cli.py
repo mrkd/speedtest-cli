@@ -596,6 +596,8 @@ def speedtest():
                    '%(latency)s ms' % best)
     else:
         if args.csv:
+            print_('Hosted by %(sponsor)s (%(name)s) [%(d)0.2f km]: '
+                   '%(latency)s ms,' % best, end='') 
             print_('%(latency)s,' % best, end='')
         else:
             print_('Ping: %(latency)s ms' % best)
