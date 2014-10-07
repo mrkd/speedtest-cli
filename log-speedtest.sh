@@ -1,10 +1,10 @@
 #!/bin/bash
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$( pwd )"
 echo "Script directory: ${SCRIPT_DIR}"
 DATA_DIR="data"
 # create data directory if doesn't exist
-mkdir -p ${DATA_DIR}
+mkdir -p ${SCRIPT_DIR}/${DATA_DIR}
 
 DATE_TIME=`date +%Y.%m.%d-%H.%M.%S`
 touch ${SCRIPT_DIR}/${DATA_DIR}/speedtest-results.txt
